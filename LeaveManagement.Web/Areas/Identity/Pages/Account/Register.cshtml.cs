@@ -2,24 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
+using LeaveManagement.Common.Constants;
+using LeaveManagement.Data;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using LeaveManagement.Web.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
-using LeaveManagement.Web.Constants;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace LeaveManagement.Web.Areas.Identity.Pages.Account
 {
@@ -90,15 +83,12 @@ namespace LeaveManagement.Web.Areas.Identity.Pages.Account
             public string Lastname { get; set; }
 
             [DataType(DataType.Date)]
-            [Display(Name = "Date of Birth")]
+            [Display(Name = "Date Of Birth")]
             public DateTime? DateOfBirth { get; set; }
 
             [DataType(DataType.Date)]
             [Display(Name = "Date Joined")]
             public DateTime? DateJoined { get; set; }
-
-
-
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -156,7 +146,7 @@ namespace LeaveManagement.Web.Areas.Identity.Pages.Account
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                        values: new { area = "Identity", userId, code, returnUrl },
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",

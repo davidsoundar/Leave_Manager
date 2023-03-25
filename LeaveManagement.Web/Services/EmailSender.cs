@@ -18,19 +18,6 @@ namespace LeaveManagement.Web.Services
 
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var message = new MailMessage
-            {
-                From = new MailAddress(fromEmailAddress),
-                Subject = subject,
-                Body = htmlMessage,
-                IsBodyHtml = true
-            };
-
-            message.To.Add(new MailAddress(email));
-
-            using var client = new SmtpClient(smtpServer, smtpPort);
-            client.Send(message);
-
             return Task.CompletedTask;
         }
     }
